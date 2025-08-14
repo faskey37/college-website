@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjuman College of Engineering & Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern Color Scheme */
+        :root {
+            --primary: #003366; /* Official blue color */
+            --secondary: #e51937; /* Official red color */
+            --accent: #f8b334; /* Official gold color */
+            --light: #f5f7fa;
+            --dark: #222;
+            --text: #333;
+            --text-light: #777;
+            --white: #fff;
+        }
+
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #c0102a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Header Styles */
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-bar-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: right;
+            gap: 20px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+            gap: 15px;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: right;
+        }
+
+        .contact-info i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
+
+        .approval-badges {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 20px;
+        }
+
+        .approval-badge {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* College Header */
+        .college-header {
+            background: var(--dark);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .college-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: url('college-bg.jpg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .college-name {
+            font-size: 1.0rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .college-subtext {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation Bar */
+        .main-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: transparent;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-navbar.scrolled {
+            background: rgba(0, 51, 102, 0.98);
+        }
+
+        .nav-container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: end;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li a {
+            color: var(--white);
+            padding: 15px 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links li a i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 220px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            color: var(--text) !important;
+            padding: 12px 20px !important;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--secondary) !important;
+            background: #f9f9f9;
+            padding-left: 25px !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            justify-self: end;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 80vh;
+            max-height: 800px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .slider-track {
+            display: grid;
+            grid-auto-flow: column;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            align-content: center;
+            padding: 0 10%;
+            color: var(--white);
+            background: rgba(0, 51, 102, 0.6);
+            text-align: center;
+        }
+
+        .slide-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: grid;
+            justify-content: center;
+        }
+
+        .slider-dots {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+
+        /* Quick Links Section */
+        .quick-links-section {
+            padding: 60px 0;
+            background: var(--white);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .quick-link-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .quick-link-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .quick-link-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Announcements Section */
+        .announcements-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .announcements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .announcement-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .announcement-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .announcement-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .announcement-header a {
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .announcement-list {
+            padding: 20px;
+        }
+
+        .announcement-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+        }
+
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-item i {
+            color: var(--secondary);
+        }
+
+        /* Departments Section */
+        .departments-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .department-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .department-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .department-content {
+            padding: 20px;
+        }
+
+        .department-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .department-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .footer-about p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--secondary);
+            font-size: 0.8rem;
+        }
+
+        .footer-contact p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            margin-right: 15px;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-social {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: start;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: rgba(0,0,0,0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: grid;
+            }
+            
+            .approval-badges {
+                display: none;
+            }
+            
+            .top-bar-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1rem;
+            }
+            
+            .college-name {
+                font-size: 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+            
+            .footer-links a {
+                justify-content: center;
+            }
+        }
+        
+        /* College Banner Section */
+        .college-banner {
+            position: relative;
+            height: 60vh;
+            min-height: 500px;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+        }
+
+        .college-banner-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .college-banner-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .college-banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+        }
+
+        .college-banner-content {
+            position: relative;
+            z-index: 3;
+            color: var(--dark);
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .college-banner-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .college-banner-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-grid">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone-alt"></i> +91 712 2582749</span>
+                    <span><i class="fas fa-envelope"></i> eng.acet@gmail.com</span>
+                </div>
+                <div class="approval-badges">
+                    <span class="approval-badge">Approved by AICTE, New Delhi</span>
+                    <span class="approval-badge">Affiliated to RTMNU, Nagpur</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- College Header -->
+    <header class="college-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="college-name">ANJUMAN COLLEGE OF ENGINEERING & TECHNOLOGY</h1>
+                <p class="college-subtext">Managed by: Anjuman Hami-E-Islam, Nagpur</p>
+            </div>
+        </div>
+    
+
+    <!-- Navigation Bar -->
+    <nav class="main-navbar" id="mainNavbar">
+        <div class="container">
+            <div class="nav-container">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#">About College</a>
+                            <a href="#">Vision & Mission</a>
+                            <a href="#">Governing Body</a>
+                            <a href="#">Principal's Message</a>
+                            <a href="#">Infrastructure</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">DEPARTMENTS <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#">Computer Science & Engineering</a>
+                            <a href="#">Mechanical Engineering</a>
+                            <a href="#">Civil Engineering</a>
+                            <a href="#">Electrical Engineering</a>
+                            <a href="#">Electronics & Telecommunication</a>
+                            <a href="#">Artificial Intelligence & Data Science</a>
+                        </div>
+                    </li>
+                    <li><a href="#">PLACEMENTS</a></li>
+                    <li><a href="#">RESEARCH</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ALUMNI</a></li>
+                    <li><a href="#">NAAC</a></li>
+                    <li><a href="#">CONTACT US</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="college-banner">
+        <div class="college-banner-image">
+            <img src="college.jpg" alt="College Campus">
+        </div>
+        <div class="college-banner-overlay"></div>
+        <div class="college-banner-content">
+            <h2>Welcome to Anjuman College of Engineering</h2>
+            <p>A premier institution for technical education with state-of-the-art infrastructure and experienced faculty</p>
+            <a href="#" class="btn btn-primary">Explore Campus</a>
+        </div>
+    </section>
+    </header>
+ 
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slider-track">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="https://source.unsplash.com/random/1920x1080/?college,campus" alt="College Campus">
+                    <div class="slide-content">
+                        <h2>Excellence in Technical Education</h2>
+                        <p>Shaping future engineers with world-class infrastructure and faculty since 1995</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="https://source.unsplash.com/random/1920x1080/?engineering,lab" alt="Engineering Lab">
+                    <div class="slide-content">
+                        <h2>State-of-the-Art Facilities</h2>
+                        <p>Modern laboratories and equipment for hands-on learning experience</p>
+                        <a href="#" class="btn btn-primary">View Facilities</a>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="https://source.unsplash.com/random/1920x1080/?graduation,ceremony" alt="Graduation">
+                    <div class="slide-content">
+                        <h2>100% Placement Assistance</h2>
+                        <p>Consistent track record of placements in top companies with highest packages</p>
+                        <a href="#" class="btn btn-primary">Placement Stats</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links-section">
+        <div class="container">
+            <h2 class="section-title">Quick Links</h2>
+            <div class="quick-links-grid">
+                <div class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Admissions</h3>
+                    <p>Information about admission process and requirements</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+                
+                <div class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Academic Calendar</h3>
+                    <p>Important dates and events for the academic year</p>
+                    <a href="#" class="btn btn-primary">Download</a>
+                </div>
+                
+                <div class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>E-Library</h3>
+                    <p>Access to digital resources and research materials</p>
+                    <a href="#" class="btn btn-primary">Visit Library</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements-section">
+        <div class="container">
+            <h2 class="section-title">Announcements</h2>
+            <div class="announcements-grid">
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <h3>Notices</h3>
+                        <a href="#">View All</a>
+                    </div>
+                    <div class="announcement-list">
+                        <div class="announcement-item">
+                            <i class="fas fa-bullhorn"></i>
+                            <div>
+                                <h4>Semester Exam Schedule</h4>
+                                <p>Winter 2023 exam dates announced</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-bullhorn"></i>
+                            <div>
+                                <h4>Library Closure</h4>
+                                <p>Library will remain closed on 25th Dec</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-bullhorn"></i>
+                            <div>
+                                <h4>Hostel Fee Payment</h4>
+                                <p>Last date extended to 30th Nov</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <h3>Events</h3>
+                        <a href="#">View All</a>
+                    </div>
+                    <div class="announcement-list">
+                        <div class="announcement-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Tech Fest 2023</h4>
+                                <p>Annual technical festival on 15-17 Dec</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Guest Lecture</h4>
+                                <p>Industry expert on AI trends - 5th Dec</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Sports Day</h4>
+                                <p>Annual sports competitions - 20th Dec</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <h3>News</h3>
+                        <a href="#">View All</a>
+                    </div>
+                    <div class="announcement-list">
+                        <div class="announcement-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>
+                                <h4>Research Grant</h4>
+                                <p>Dept. of CSE receives ₹25L research grant</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>
+                                <h4>Placement Record</h4>
+                                <p>95% students placed in 2023 batch</p>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>
+                                <h4>Ranking</h4>
+                                <p>Ranked among top engineering colleges</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section class="departments-section">
+        <div class="container">
+            <h2 class="section-title">Our Departments</h2>
+            <div class="departments-grid">
+                <div class="department-card">
+                    <div class="department-image" style="background-image: url('https://source.unsplash.com/random/600x400/?computer,science')"></div>
+                    <div class="department-content">
+                        <h3>Computer Science & Engineering</h3>
+                        <p>Cutting-edge curriculum in software development, AI, and data science.</p>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-image" style="background-image: url('https://source.unsplash.com/random/600x400/?mechanical,engineering')"></div>
+                    <div class="department-content">
+                        <h3>Mechanical Engineering</h3>
+                        <p>Comprehensive program covering design, analysis, and manufacturing.</p>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-image" style="background-image: url('https://source.unsplash.com/random/600x400/?civil,engineering')"></div>
+                    <div class="department-content">
+                        <h3>Civil Engineering</h3>
+                        <p>Program focused on infrastructure development and construction.</p>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <h3>About College</h3>
+                    <p>Anjuman College of Engineering & Technology is a premier technical institution approved by AICTE and affiliated to RTMNU, committed to excellence in engineering education since 1995.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Academic Calendar</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Mandatory Disclosure</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Fees Structure</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Admission Procedure</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> NIRF Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Owala Bazaar Road, Sadar, Nagpur - 440002, Maharashtra, India</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 712 2582749, 2583559, 5612870</p>
+                    <p><i class="fas fa-envelope"></i> eng.acet@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> www.anjumanengg.edu.in</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Anjuman College of Engineering & Technology. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll behavior
+        const navbar = document.getElementById('mainNavbar');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hero Slider
+        const sliderTrack = document.querySelector('.slider-track');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+        let interval;
+        
+        function goToSlide(index) {
+            sliderTrack.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        }
+        
+        function startAutoPlay() {
+            interval = setInterval(nextSlide, 5000);
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(interval);
+                goToSlide(index);
+                startAutoPlay();
+            });
+        });
+        
+        startAutoPlay();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+         document.addEventListener('DOMContentLoaded', function() {
+            const banner = document.querySelector('.college-banner-content');
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(20px)';
+            banner.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            setTimeout(() => {
+                banner.style.opacity = '1';
+                banner.style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
